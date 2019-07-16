@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Git是如今非常流行的版本控制工具，作为一名java后端开发人员，掌握它是必须的。GitHub是全球著名的代码托管服务平台，而GitHub的很多操作都是基于Git的。本篇文章为大家介绍基本的Git命令。">
+<meta name="keywords" content="java mysql web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git&amp;GitHub学习笔记（一）">
+<meta property="og:url" content="http://yoursite.com/2019/07/16/Git-GitHub学习笔记（一）/index.html">
+<meta property="og:site_name" content="XuRenyi&#39;s blog">
+<meta property="og:description" content="Git是如今非常流行的版本控制工具，作为一名java后端开发人员，掌握它是必须的。GitHub是全球著名的代码托管服务平台，而GitHub的很多操作都是基于Git的。本篇文章为大家介绍基本的Git命令。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-07-16T06:42:38.158Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Git&amp;GitHub学习笔记（一）">
+<meta name="twitter:description" content="Git是如今非常流行的版本控制工具，作为一名java后端开发人员，掌握它是必须的。GitHub是全球著名的代码托管服务平台，而GitHub的很多操作都是基于Git的。本篇文章为大家介绍基本的Git命令。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/07/16/Git-GitHub学习笔记（一）/">
+
+
+
+
+
+  <title>Git&GitHub学习笔记（一） | XuRenyi's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XuRenyi's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            有料
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/16/Git-GitHub学习笔记（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XuRenyi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XuRenyi's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Git&GitHub学习笔记（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-07-16T14:33:03+08:00">
+                2019-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  Git是如今非常流行的版本控制工具，作为一名java后端开发人员，掌握它是必须的。GitHub是全球著名的代码托管服务平台，而GitHub的很多操作都是基于Git的。本篇文章为大家介绍基本的Git命令。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="Git-amp-GitHub学习笔记（一）"><a href="#Git-amp-GitHub学习笔记（一）" class="headerlink" title="Git&amp;GitHub学习笔记（一）"></a>Git&amp;GitHub学习笔记（一）</h1><h2 id="一-Git基本概念"><a href="#一-Git基本概念" class="headerlink" title="一.Git基本概念"></a>一.Git基本概念</h2><h3 id="repository"><a href="#repository" class="headerlink" title="repository"></a>repository</h3><p>repository是仓库的意思，如果你想开源一个项目，那么你就必须建立一个repository。</p>
+<h3 id="issue"><a href="#issue" class="headerlink" title="issue"></a>issue</h3><p>issue是问题的意思，如果你的开源项目中有bug或者有不好的地方，那么别人就可以给你提意见，这就是issue。提的意见多了就是issues。你看到这些issues就可以去修复。</p>
+<h3 id="star"><a href="#star" class="headerlink" title="star"></a>star</h3><p>star就是给你的项目“点赞”。不过GitHub上得到别人的点赞还是比较难的。</p>
+<h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><p>fork原本的意思是“叉子”。这可以理解为别人想在你的项目上做改动，然后把它运用到自己的项目上。</p>
+<h3 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a>Pull Request</h3><p>Pull Request是发起请求的意思。别人fork了你的项目以后，做了改动，然后他想把他改动后的项目合并到原来的项目中，那么他就可以发起请求。此时，你就会收到这个请求，你可以审查他的代码，如果你同意，那么就接受这个请求。</p>
+<h3 id="Watch"><a href="#Watch" class="headerlink" title="Watch"></a>Watch</h3><p>Watch是“关注”的意思，可以类比微博中的关注。当你关注了某个项目，那么这个项目有任何的更新，你都会收到通知。</p>
+<h2 id="二-Git基本命令"><a href="#二-Git基本命令" class="headerlink" title="二.Git基本命令"></a>二.Git基本命令</h2><p><strong><em>注意：</em></strong> 在使用Git命令之前，要先建立一个文件，这个文件就是Git仓库。所有的Git命令都要在这个文件中进行。</p>
+<h3 id="git-init"><a href="#git-init" class="headerlink" title="git init"></a>git init</h3><p>仓库初始化，就是把那个文件变成仓库文件。</p>
+<h3 id="git-status"><a href="#git-status" class="headerlink" title="git status"></a>git status</h3><p>查看状态。</p>
+<h3 id="git-add"><a href="#git-add" class="headerlink" title="git add"></a>git add</h3><p>git add命令是用来操作想要提交的文件。例如，git add a.md 命令执行后，a.md文件就处于等待被提交的状态。</p>
+<h3 id="git-commit-m-“提交信息”"><a href="#git-commit-m-“提交信息”" class="headerlink" title="git commit -m “提交信息”"></a>git commit -m “提交信息”</h3><p>这是正式提交命令。上述的git add命令只是让文件处于缓冲区，并没有真的提交，这样做的目的是防止误提交。-m 后面表示此次提交的提交信息。</p>
+<h3 id="git-log"><a href="#git-log" class="headerlink" title="git log"></a>git log</h3><p>git log用于查看所有的提交记录。</p>
+<h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a>git branch</h3><p>git init对仓库初始化以后，会默认建立一个名为master的分支。git branch用来查看分支的情况。</p>
+<h3 id="git-branch-a"><a href="#git-branch-a" class="headerlink" title="git branch a"></a>git branch a</h3><p>新建一个名为a的分支。</p>
+<h3 id="git-checkout-a"><a href="#git-checkout-a" class="headerlink" title="git checkout a"></a>git checkout a</h3><p>切换到a分支。</p>
+<h3 id="git-checkout-b-a"><a href="#git-checkout-b-a" class="headerlink" title="git checkout -b a"></a>git checkout -b a</h3><p>把git branch a和git checkout a这两个命令合并为一个命令，即新建一个名为a的分支并自动切换到a分支。</p>
+<h3 id="git-branch-d"><a href="#git-branch-d" class="headerlink" title="git branch -d"></a>git branch -d</h3><p>删除分支。例如：git branch -d a 就是删除分支a的命令。</p>
+<h3 id="git-branch-D"><a href="#git-branch-D" class="headerlink" title="git branch -D"></a>git branch -D</h3><p>强制删除分支。因为git branch -d 有可能删除分支失败，所以需要强制删除。</p>
+<h3 id="git-tag"><a href="#git-tag" class="headerlink" title="git tag"></a>git tag</h3><p>首先介绍一下版本的概念，我们在开发软件的时候，都会有版本号，比如v1.0，v1.1。那么如果v1.1出现了bug，此时想知道v1.0有没有bug，只需要切换到v1.0然后测试代码即可。那么，这么做的前提就是建立标签。<br>git tag v1.0 就是在当前代码状态下建立了一个v1.0的标签。而git tag 是查看历史tag记录。</p>
+<h3 id="git-checkout-v1-0"><a href="#git-checkout-v1-0" class="headerlink" title="git checkout v1.0"></a>git checkout v1.0</h3><p>git checkout 不仅有切换分支的功能，还有切换标签的功能。</p>
+<h3 id="git-clone"><a href="#git-clone" class="headerlink" title="git clone"></a>git clone</h3><p>从远程仓库clone项目到本地。可以把clone理解为复制。例如要把名为test的远程项目clone到本地，可以执行如下命令：<br><code>git clone git@github.com:renyixu/test</code><br>此处的<code>git@github.com:renyixu/test</code>可以从GitHub网站对应的项目中获取，这个我相信你们可以解决。</p>
+<h3 id="git-pull-origin-master"><a href="#git-pull-origin-master" class="headerlink" title="git pull origin master"></a>git pull origin master</h3><p>把远程仓库的代码同步到本地。</p>
+<h3 id="git-push-origin-master"><a href="#git-push-origin-master" class="headerlink" title="git push origin master"></a>git push origin master</h3><p>把本地的代码同步到远程仓库。</p>
+<h3 id="git-remote-v"><a href="#git-remote-v" class="headerlink" title="git remote -v"></a>git remote -v</h3><p>查看当前项目有哪些远程仓库。</p>
+<h3 id="git-remote-add-origin-git-github-com-renyixu-test"><a href="#git-remote-add-origin-git-github-com-renyixu-test" class="headerlink" title="git remote add origin git@github.com:renyixu/test"></a>git remote add origin <a href="mailto:git@github.com" target="_blank" rel="noopener">git@github.com</a>:renyixu/test</h3><p>把本地项目与远程仓库关联。</p>
+<h2 id="三-提交代码"><a href="#三-提交代码" class="headerlink" title="三.提交代码"></a>三.提交代码</h2><p>向远程仓库提交代码有两种方式：</p>
+<h3 id="方式1："><a href="#方式1：" class="headerlink" title="方式1："></a>方式1：</h3><p>本地没有Git仓库。从GitHub上clone下某个项目（假设为test项目），此时test项目就被clone到了本地了，而且此时的本地的test项目已经是一个完整的仓库，不需要进行仓库初始化，而且也不需要与远程的仓库关联了，可以直接进行提交。</p>
+<h4 id="方式1的具体提交代码的操作："><a href="#方式1的具体提交代码的操作：" class="headerlink" title="方式1的具体提交代码的操作："></a>方式1的具体提交代码的操作：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1.切换到本地test项目下。</span><br><span class="line">2.git add 你想要提交的文件（如果有多个要提交的文件，那么就需要进行多次git add命令，即每个文件都需要进行一次git add命令）。</span><br><span class="line">3.git commit -m &quot;提交信息&quot;</span><br><span class="line">4.git push origin master</span><br></pre></td></tr></table></figure>
+<h3 id="方式2："><a href="#方式2：" class="headerlink" title="方式2："></a>方式2：</h3><p>本地有Git仓库。</p>
+<h4 id="方式2的具体提交代码的操作："><a href="#方式2的具体提交代码的操作：" class="headerlink" title="方式2的具体提交代码的操作："></a>方式2的具体提交代码的操作：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1.在GitHub上创建一个test01项目（此处以test01项目为例）。</span><br><span class="line">2.在本地新建一个test01文件，并切换到test01目录。</span><br><span class="line">3.初始化test01仓库，具体命令为：git init</span><br><span class="line">4.把本地仓库与远程仓库关联。具体的命令为：git remote add origin git@github.com:renyixu/test01  ,此处的origin是给仓库取的名字，当然名字可以随便取，不过当只有一个远程仓库的时候，一般默认就取origin。</span><br><span class="line">5.把远程仓库的文件同步到本地仓库，这是很重要的一步，没有这一步，后面提交代码的操作就会失败。具体的命令为：git pull origin master</span><br><span class="line">6.git add你想要提交的文件，同方式1,此处不再赘述。</span><br><span class="line">7.git commit -m &quot;提交信息&quot;</span><br><span class="line">8.git push origin master</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/16/MarkDown/" rel="next" title="MarkDown">
+                <i class="fa fa-chevron-left"></i> MarkDown
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="XuRenyi">
+            
+              <p class="site-author-name" itemprop="name">XuRenyi</p>
+              <p class="site-description motion-element" itemprop="description">this is xurenyi's blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Git-amp-GitHub学习笔记（一）"><span class="nav-number">1.</span> <span class="nav-text">Git&amp;GitHub学习笔记（一）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一-Git基本概念"><span class="nav-number">1.1.</span> <span class="nav-text">一.Git基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#repository"><span class="nav-number">1.1.1.</span> <span class="nav-text">repository</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#issue"><span class="nav-number">1.1.2.</span> <span class="nav-text">issue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#star"><span class="nav-number">1.1.3.</span> <span class="nav-text">star</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fork"><span class="nav-number">1.1.4.</span> <span class="nav-text">fork</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Pull-Request"><span class="nav-number">1.1.5.</span> <span class="nav-text">Pull Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Watch"><span class="nav-number">1.1.6.</span> <span class="nav-text">Watch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#二-Git基本命令"><span class="nav-number">1.2.</span> <span class="nav-text">二.Git基本命令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-init"><span class="nav-number">1.2.1.</span> <span class="nav-text">git init</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-status"><span class="nav-number">1.2.2.</span> <span class="nav-text">git status</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-add"><span class="nav-number">1.2.3.</span> <span class="nav-text">git add</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-commit-m-“提交信息”"><span class="nav-number">1.2.4.</span> <span class="nav-text">git commit -m “提交信息”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-log"><span class="nav-number">1.2.5.</span> <span class="nav-text">git log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">1.2.6.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-a"><span class="nav-number">1.2.7.</span> <span class="nav-text">git branch a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout-a"><span class="nav-number">1.2.8.</span> <span class="nav-text">git checkout a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout-b-a"><span class="nav-number">1.2.9.</span> <span class="nav-text">git checkout -b a</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-d"><span class="nav-number">1.2.10.</span> <span class="nav-text">git branch -d</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch-D"><span class="nav-number">1.2.11.</span> <span class="nav-text">git branch -D</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-tag"><span class="nav-number">1.2.12.</span> <span class="nav-text">git tag</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout-v1-0"><span class="nav-number">1.2.13.</span> <span class="nav-text">git checkout v1.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-clone"><span class="nav-number">1.2.14.</span> <span class="nav-text">git clone</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-pull-origin-master"><span class="nav-number">1.2.15.</span> <span class="nav-text">git pull origin master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-push-origin-master"><span class="nav-number">1.2.16.</span> <span class="nav-text">git push origin master</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-remote-v"><span class="nav-number">1.2.17.</span> <span class="nav-text">git remote -v</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-remote-add-origin-git-github-com-renyixu-test"><span class="nav-number">1.2.18.</span> <span class="nav-text">git remote add origin git@github.com:renyixu/test</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#三-提交代码"><span class="nav-number">1.3.</span> <span class="nav-text">三.提交代码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#方式1："><span class="nav-number">1.3.1.</span> <span class="nav-text">方式1：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式1的具体提交代码的操作："><span class="nav-number">1.3.1.1.</span> <span class="nav-text">方式1的具体提交代码的操作：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方式2："><span class="nav-number">1.3.2.</span> <span class="nav-text">方式2：</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方式2的具体提交代码的操作："><span class="nav-number">1.3.2.1.</span> <span class="nav-text">方式2的具体提交代码的操作：</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuRenyi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
