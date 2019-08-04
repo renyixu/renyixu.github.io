@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="代码运行时，总会出现错误或者是异常。因此，Java从C++继承了以面向对象方式处理异常的机制，用对象的方式来表示一个（或一类）异常，从而使开发人员写出具有容错性的健壮的代码。">
+<meta name="keywords" content="java mysql web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java异常处理">
+<meta property="og:url" content="http://yoursite.com/2019/08/04/Java异常处理/index.html">
+<meta property="og:site_name" content="XuRenyi&#39;s blog">
+<meta property="og:description" content="代码运行时，总会出现错误或者是异常。因此，Java从C++继承了以面向对象方式处理异常的机制，用对象的方式来表示一个（或一类）异常，从而使开发人员写出具有容错性的健壮的代码。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/01Java%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/02try-catch-finally%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/03%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E4%B8%80%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/04%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C2.PNG">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/05%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C3.PNG">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/06%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C4.PNG">
+<meta property="og:updated_time" content="2019-08-04T13:14:25.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java异常处理">
+<meta name="twitter:description" content="代码运行时，总会出现错误或者是异常。因此，Java从C++继承了以面向对象方式处理异常的机制，用对象的方式来表示一个（或一类）异常，从而使开发人员写出具有容错性的健壮的代码。">
+<meta name="twitter:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/01Java%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/08/04/Java异常处理/">
+
+
+
+
+
+  <title>Java异常处理 | XuRenyi's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">XuRenyi's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            有料
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/08/04/Java异常处理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="XuRenyi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XuRenyi's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Java异常处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-04T21:01:00+08:00">
+                2019-08-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  代码运行时，总会出现错误或者是异常。因此，Java从C++继承了以面向对象方式处理异常的机制，用对象的方式来表示一个（或一类）异常，从而使开发人员写出具有容错性的健壮的代码。
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>导语：</strong> 代码运行时，总会出现错误或者是异常。因此，Java从C++继承了以面向对象方式处理异常的机制，用对象的方式来表示一个（或一类）异常，从而使开发人员写出具有容错性的健壮的代码。</p>
+<h1 id="异常概述"><a href="#异常概述" class="headerlink" title="异常概述"></a>异常概述</h1><h2 id="Java异常体系结构"><a href="#Java异常体系结构" class="headerlink" title="Java异常体系结构"></a>Java异常体系结构</h2><p>首先介绍一下Java异常体系结构，如下图所示：<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/01Java%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E5%9B%BE.png" alt="Java异常体系结构"><br>在Java中，任何异常都是<code>Throwable</code>类或其子类对象；Throwable有两个子类，分别是：<code>Error</code>和<code>Exception</code>；<br><code>Error</code>：这是系统错误类，是程序运行时Java内部的错误，一般是由硬件或操作系统引起的，开发人员一般无法处理，这类异常发生时，只能关闭程序。<br><code>Exception</code>：这是异常类，该类及其子类对象表示的错误一般是由算法考虑不周或编码时疏忽所致，需要开发人员处理。</p>
+<h2 id="Java异常分类"><a href="#Java异常分类" class="headerlink" title="Java异常分类"></a>Java异常分类</h2><p>Java中的异常被分为两大类：<code>Runtime异常</code>和<code>非Runtime异常</code>，其中非Runtime异常也被称作<code>Checked异常</code>。<br><code>Runtime异常</code>：是Java程序运行时产生的异常，例如：数组下标越界、空指针异常、对象类型强制转换错误等。<code>Error</code>和<code>RuntimeException</code>都是Runtime异常，编译时对这类异常不做检查。<br><code>非Runtime异常</code>：也称<code>Checked异常</code>，例如IOException等。在编译时，编译器会对这类异常进行检查，看看有没有对这类异常进行处理，如果没有进行处理，编译会无法通过。</p>
+<h1 id="异常处理机制"><a href="#异常处理机制" class="headerlink" title="异常处理机制"></a>异常处理机制</h1><h2 id="异常的捕获与处理"><a href="#异常的捕获与处理" class="headerlink" title="异常的捕获与处理"></a>异常的捕获与处理</h2><p>Java采用try-catch-finally语句来对异常进行捕获并处理。该语句的语法格式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">            //可能会产生异常的代码</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception_1 e1)&#123;</span><br><span class="line">            //处理Exception_1的代码</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception_2 e2)&#123;</span><br><span class="line">            //处理Exception_2的代码</span><br><span class="line">        &#125;</span><br><span class="line">        ……</span><br><span class="line">        catch(Exception_n en)&#123;</span><br><span class="line">            //处理Exception_n的代码</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            //通常是释放资源的代码</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中catch和finally都是可以默认的（即可以不写），但是不允许同时默认catch和finally。<br><code>try语句块</code>：该语句块中是程序正常情况下应该要完成的功能，而这些代码中可能会产生异常，其后面的catch语句块就是用来捕获并处理这些异常的。<br><code>catch语句块</code>：该语句块用来捕获并处理try语句块中产生的异常。每个catch语句块声明其能处理的一种特定类型的异常，catch后面的括号中就是该特定类型的异常；不过，在Java7以前，每个catch语句块只能捕获一种异常，但是，从Java7开始就支持一个catch捕获多种异常，多个异常之间用<code>|</code>隔开。写法如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">try&#123;</span><br><span class="line">            //可能会产生异常的代码</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception_1 | Exception_2 | Exception_3 | ... | Exception_n e1)&#123;</span><br><span class="line">            //统一处理Exception_1、Exception_2、Exception_3、...、Exception_n的代码</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            //通常是释放资源的代码</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>catch语句块中声明的异常对象（<code>catch(Exception_n e)</code>）封装了该异常的信息，可以通过该异常对象的一些方法来获取这些信息：<br><code>String getMessage()</code>：用来获取有关异常事件的详细信息。<br><code>void printStackTrace()</code>：用来跟踪异常事件发生时执行堆栈的内容。<br><code>finally语句块</code>：该语句块一般用于释放资源等操作。无论try语句块中是否有异常，finally语句块都会执行。</p>
+<h2 id="try-catch-finally执行流程（最基本的情况）"><a href="#try-catch-finally执行流程（最基本的情况）" class="headerlink" title="try-catch-finally执行流程（最基本的情况）"></a>try-catch-finally执行流程（最基本的情况）</h2><p>这里先介绍一下try-catch-finally执行流程最基本的情况，所谓最基本的情况就是没有用到throw关键字（抛出异常，后面会讲到）、return关键字等。<br>首先，执行try中的代码，如果 <strong>try中的代码没有发生异常</strong>，那么catch中的代码就不执行，等try中的代码执行完毕后直接执行finally中的代码；如果 <strong>try中的代码发生了异常</strong>(假设发生异常的代码语句是xxx),那么try中xxx下面的代码就不会执行了，会立即跳转到catch中去匹配异常，若匹配到了对应的catch中声明的异常对象，那么就执行该catch语句块中的代码，并且后面的catch语句块就不再执行。等catch语句块中的代码执行完毕，就执行finally语句块中的代码。此时，整个try-catch-finally才算执行完毕。<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/02try-catch-finally%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B.png" alt="try-catch-finally基本执行流程"></p>
+<h1 id="声明抛出异常"><a href="#声明抛出异常" class="headerlink" title="声明抛出异常"></a>声明抛出异常</h1><p>声明抛出异常是一个子句，它只能写在方法头部的后面,其格式如下：<br><code>throws &lt;异常列表&gt;</code><br>举例：<code>public void fun() throws IOException{......}</code><br>若在一个方法中声明抛出异常，那么调用该方法的调用者就必须对该异常进行处理，调用者处理该异常有两种方式：</p>
+<ol>
+<li>使用try-catch-finally来捕获并处理该异常。</li>
+<li>继续抛出，留给后面的调用者去处理，从而形成<strong>异常处理链</strong>。</li>
+</ol>
+<h1 id="抛出异常"><a href="#抛出异常" class="headerlink" title="抛出异常"></a>抛出异常</h1><p>上面讲到的声明抛出异常只是告诉方法的调用者要去处理异常，这只是个说明性的语句，因为方法的代码中可能有异常，也可能没有异常（没有异常时就不会抛出）。<br>而真正抛出异常的语句是<code>throw &lt;异常对象&gt;</code>，其中的异常异常对象必须是Throwable或其子类对象。例如：<br><code>throw new Exception(&quot;这是一个异常对象！&quot;)</code><br>当执行到上述语句时，会立即结束方法的执行。<br>接下来通过案例来讲解，请看下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    public void test1()&#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            int a=1/0; //发生异常的代码</span><br><span class="line">            System.out.println(&quot;算术异常！！！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        catch(ArithmeticException | NumberFormatException e)&#123;</span><br><span class="line">            System.out.println(e.getMessage()); //打印异常信息，并没有抛出异常</span><br><span class="line">            throw new ArithmeticException(&quot;抛出算术异常！！！&quot;); //抛出算术异常</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            System.out.println(&quot;执行finally代码块！！&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;已经抛出算术异常！！！&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的运行结果如下图所示：<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/03%E4%BB%A3%E7%A0%81%E7%89%87%E6%AE%B5%E4%B8%80%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C.PNG" alt="代码运行结果1"><br>try中的<code>int a=1/0;</code>语句发生了算术异常（除数为0），直接跳转到catch中去匹配异常对象，匹配到了ArithmeticException异常对象，然后执行catch中的代码：打印异常信息，抛出异常。但是，在catch中抛出异常之前，<strong>会先执行finally中的代码</strong>，等finally中的代码执行完毕，再回到catch中抛出异常，而catch中的异常抛出后，整个方法就结束了，方法中剩下的代码就不执行了。<br>以上就是上述代码的完整执行流程。</p>
+<h1 id="异常屏蔽问题"><a href="#异常屏蔽问题" class="headerlink" title="异常屏蔽问题"></a>异常屏蔽问题</h1><p>如果在try-catch-finally代码块中，try、catch以及finally中都有异常抛出，那么最终只能抛出finally代码块中的异常。这就是<strong>异常屏蔽</strong>问题。<br>请看下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">//如果try、catch以及finally中都有异常抛出，那么最终只能抛出finally中的异常，try和catch中的异常抛出会被屏蔽</span><br><span class="line">   @Test</span><br><span class="line">   public  void test4()&#123;</span><br><span class="line">       try&#123;</span><br><span class="line">           System.out.println(&quot;try&quot;);</span><br><span class="line">           throw new RuntimeException(&quot;try中抛出异常！！！&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       catch(Exception e)&#123;</span><br><span class="line">           System.out.println(&quot;catch&quot;);</span><br><span class="line">           throw new RuntimeException(&quot;catch中抛出异常！！！&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">       finally&#123;</span><br><span class="line">           System.out.println(&quot;finally&quot;);</span><br><span class="line">           throw new RuntimeException(&quot;finally中抛出异常！！！&quot;);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的运行结果为：<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/04%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C2.PNG" alt="代码运行结果2"><br>首先执行try中的代码：<code>打印“try”</code>；然后在try中抛出异常，那么在try中的异常抛出<strong>之前</strong>，要去catch中匹配异常对象并执行catch代码块，于是，匹配到了Exception对象并执行catch中的代码：<code>打印“catch”</code>，然后抛出异常；那么，在抛出catch中的异常之前，要先执行finally中的代码：<code>打印“finally”</code>，并<code>抛出finally中的异常</code>，此时整个方法执行结束，前面的两个异常不会被抛出。这就是所谓的<strong>异常屏蔽</strong>。</p>
+<h1 id="其他问题"><a href="#其他问题" class="headerlink" title="其他问题"></a>其他问题</h1><p>如果在tr-catch-finally代码块中有return，那么执行流程又是怎样的呢？<br>请看下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public int test5()&#123;</span><br><span class="line">        try&#123;</span><br><span class="line">            int a=1/0; //发生异常的代码</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception e)&#123;</span><br><span class="line">            System.out.println(&quot;catch&quot;);</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            System.out.println(&quot;finally&quot;);</span><br><span class="line">            return 3; //禁止在finally中使用return语句，这里只是举例说明，在实际开发中禁止使用</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>在main方法中执行上述方法，结果为：<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/05%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C3.PNG" alt="代码运行结果3"><br>try中<code>int a=1/0;</code>语句发生了异常，那么就跳转到catch中去匹配并执行catch中的代码，而catch中要返回整数2，在执行catch中的<code>return 2;</code>语句之前，要先去执行finally中的代码，因为finally中有<code>return 3;</code>语句，所以当执行到finally中的return语句后，整个方法就结束了，catch以及try中的return语句就不会执行了。<br>请继续看下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">public int test8()&#123;</span><br><span class="line">        // try中没有异常发生</span><br><span class="line">        try&#123;</span><br><span class="line">            int a=1/1;</span><br><span class="line">            return 1;</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception e)&#123;</span><br><span class="line">            System.out.println(&quot;catch&quot;);</span><br><span class="line">//            throw new RuntimeException(&quot;catch抛出异常！！！&quot;);</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            System.out.println(&quot;finally&quot;);</span><br><span class="line">            return 3; //禁止在finally中使用return语句，这里只是举例说明，在实际开发中禁止使用</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的返回的结果依旧是3。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public int test8()&#123;</span><br><span class="line">        // try中没有异常发生</span><br><span class="line">        try&#123;</span><br><span class="line">            int a=1/1;</span><br><span class="line">            throw new Exception(&quot;try中的异常&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        catch(Exception e)&#123;</span><br><span class="line">            System.out.println(&quot;catch&quot;);</span><br><span class="line">            return 2;</span><br><span class="line">        &#125;</span><br><span class="line">        finally&#123;</span><br><span class="line">            System.out.println(&quot;finally&quot;);</span><br><span class="line">            return 3; //禁止在finally中使用return语句，这里只是举例说明，在实际开发中禁止使用</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>上述代码的运行结果如下图所示：<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/06%E4%BB%A3%E7%A0%81%E8%BF%90%E8%A1%8C%E7%BB%93%E6%9E%9C4.PNG" alt="代码运行结果4"><br>try中没有发生异常的代码，但try中抛出了异常，那么在抛出try中的异常之前，会先去匹配catch声明的异常对象并执行catch中的代码，因为catch中有return语句，那么在执行catch中的return语句之前，会先去执行finally中的代码，因为finally代码块中有return语句，所以当finally中的return语句执行完毕后，整个方法就结束了。前面的return语句就不会被执行了。</p>
+<p>综合上面的几段代码，我们来总结一下：</p>
+<ol>
+<li>当try、catch以及finally中都抛出了异常时，只有finally中的异常会被抛出，try和catch中的异常会被屏蔽。</li>
+<li>当try、catch以及finally中都有return语句时，只有finally中的return语句会被执行，try和catch中的return语句不会被执行。</li>
+<li>return和抛出异常（throw new XXXException()）是不能同时出现在 <strong><em>同一个</em></strong> 代码块中的。</li>
+<li>如果try中有return（throw）语句并且try中<strong>没有异常</strong>，那么在执行try中的return（throw）语句之前，要先去执行finally中的语句；同理，如果catch中有return（throw）语句，那么在执行catch中的return（throw）语句之前，要先去执行finally中的代码。</li>
+<li>一旦执行了return语句（或throw抛出异常代码），那么该方法就<strong>立即结束</strong>了。</li>
+<li>如果，在try、catch以及finally中混合了return语句和抛出异常代码（throw），执行原理请参照第<strong>4</strong>条结论。</li>
+</ol>
+<p>一句话总结一下：<strong>如果try、catch和finally中都有return语句（或者都抛出了异常），那么只有finally中的return语句会执行（或者只有finally中的异常会被抛出），try和catch中的return语句不会被执行（或者try和catch中的异常不会被抛出）。</strong></p>
+<h1 id="自定义异常类"><a href="#自定义异常类" class="headerlink" title="自定义异常类"></a>自定义异常类</h1><p>自定义异常类必须是Throwable类的子类，通常是从Exception及其子类来继承。例如，下述的MyException类就是一个自定义类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public class MyException extends Exception &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/25/Java新特性之枚举、注解、lambda表达式/" rel="next" title="Java新特性之枚举、注解、lambda表达式">
+                <i class="fa fa-chevron-left"></i> Java新特性之枚举、注解、lambda表达式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="XuRenyi">
+            
+              <p class="site-author-name" itemprop="name">XuRenyi</p>
+              <p class="site-description motion-element" itemprop="description">this is xurenyi's blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#异常概述"><span class="nav-number">1.</span> <span class="nav-text">异常概述</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Java异常体系结构"><span class="nav-number">1.1.</span> <span class="nav-text">Java异常体系结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java异常分类"><span class="nav-number">1.2.</span> <span class="nav-text">Java异常分类</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常处理机制"><span class="nav-number">2.</span> <span class="nav-text">异常处理机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#异常的捕获与处理"><span class="nav-number">2.1.</span> <span class="nav-text">异常的捕获与处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#try-catch-finally执行流程（最基本的情况）"><span class="nav-number">2.2.</span> <span class="nav-text">try-catch-finally执行流程（最基本的情况）</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#声明抛出异常"><span class="nav-number">3.</span> <span class="nav-text">声明抛出异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#抛出异常"><span class="nav-number">4.</span> <span class="nav-text">抛出异常</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#异常屏蔽问题"><span class="nav-number">5.</span> <span class="nav-text">异常屏蔽问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其他问题"><span class="nav-number">6.</span> <span class="nav-text">其他问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#自定义异常类"><span class="nav-number">7.</span> <span class="nav-text">自定义异常类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">XuRenyi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
