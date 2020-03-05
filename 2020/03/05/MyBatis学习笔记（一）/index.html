@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习MyBatis的笔记（一）">
+<meta name="keywords" content="java mysql web">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MyBatis学习笔记（一）">
+<meta property="og:url" content="http://yoursite.com/2020/03/05/MyBatis学习笔记（一）/index.html">
+<meta property="og:site_name" content="骑士逸">
+<meta property="og:description" content="学习MyBatis的笔记（一）">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&h=543&f=png&s=35582">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/1708993df0d82b96?w=173&h=77&f=png&s=3411">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/17089db5bc51403e?w=431&h=525&f=png&s=83612">
+<meta property="og:updated_time" content="2020-03-05T14:21:41.193Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MyBatis学习笔记（一）">
+<meta name="twitter:description" content="学习MyBatis的笔记（一）">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&h=543&f=png&s=35582">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/03/05/MyBatis学习笔记（一）/">
+
+
+
+
+
+  <title>MyBatis学习笔记（一） | 骑士逸</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">骑士逸</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-something">
+          <a href="/something" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            有料
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/03/05/MyBatis学习笔记（一）/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="QiShiYi">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/touxiang.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="骑士逸">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MyBatis学习笔记（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-05T22:19:50+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+              <div class="post-description">
+                  学习MyBatis的笔记（一）
+              </div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="MyBatis概述"><a href="#MyBatis概述" class="headerlink" title="MyBatis概述"></a>MyBatis概述</h2><p>MyBatis本是Apache的一个开源项目iBatis, 2010年这个项目由apache software foundation迁移到了google code，并且改名为MyBatis。2013年11月迁移到Github。</p>
+<p>MyBatis 是一个优秀的持久层框架，它对jdbc的操作数据库的过程进行封装，使开发者只需要关注 SQL 本身，而不需要花费精力去处理例如注册驱动、 创建connection、创建 statement、手动设置参数、结果集检索等 jdbc繁杂的过程代码。</p>
+<p>Mybatis 通过 xml 或注解的方式将要执行的各种 statement（statement、 preparedStatemnt、CallableStatement）配置起来，并通过 java 对象和 statement 中的 sql 进行映射生成最终执行的sql语句，最后由mybatis框架执行sql并将结果映射成java对象并返回。</p>
+<h2 id="使用JDBC存在的问题"><a href="#使用JDBC存在的问题" class="headerlink" title="使用JDBC存在的问题"></a>使用JDBC存在的问题</h2><h3 id="JDBC的编程步骤"><a href="#JDBC的编程步骤" class="headerlink" title="JDBC的编程步骤"></a>JDBC的编程步骤</h3><ol>
+<li>加载数据库驱动</li>
+<li>创建获取数据库连接</li>
+<li>创建Statement对象</li>
+<li>执行SQL语句并返回ResultSet结果集</li>
+<li>处理结果集</li>
+<li>释放资源</li>
+</ol>
+<h3 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h3><ol>
+<li>数据库连接创建、释放频繁造成系统资源浪费，从而影响系统性能。如果使用数据库连接池可解决此问题。</li>
+<li>SQL语句在代码中硬编码，造成代码不易维护，实际应用中SQL变化的可能较大，SQL语句变动需要改变 java代码。</li>
+<li>使用preparedStatement向占位符传参数存在硬编码，因为sql语句的where条件不一定，可能多也可能少，修改sql还要修改代码，系统不易维护。</li>
+<li>对结果集解析存在硬编码（查询列名），sql变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成pojo对象解析比较方便。</li>
+</ol>
+<h2 id="MyBatis架构"><a href="#MyBatis架构" class="headerlink" title="MyBatis架构"></a>MyBatis架构</h2><h3 id="MyBatis架构图"><a href="#MyBatis架构图" class="headerlink" title="MyBatis架构图"></a>MyBatis架构图</h3><p><img src="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&amp;h=543&amp;f=png&amp;s=35582" alt="图1 MyBatis架构图"></p>
+<h3 id="架构图解释"><a href="#架构图解释" class="headerlink" title="架构图解释"></a>架构图解释</h3><h4 id="MyBatis配置文件"><a href="#MyBatis配置文件" class="headerlink" title="MyBatis配置文件"></a>MyBatis配置文件</h4><ul>
+<li><p>SqlMapConfig.xml</p>
+<p>   MyBatis的全局配置文件，配置了MyBatis的运行环境等信息</p>
+</li>
+<li><p>SqlSessionFactory</p>
+<p>   会话工厂，用于创建SqlSession，通过MyBatis环境等配置信息构造SqlSessionFactory</p>
+</li>
+<li><p>SqlSession</p>
+<p>   会话，操作数据库主要通过SqlSession进行</p>
+</li>
+<li><p>Executor</p>
+<p>   MyBatis底层自定义了Executor执行器接口操作数据库，Executor接口有两个实现，一个是基本执行器、一个是缓存执行器</p>
+</li>
+<li><p>MappedStatement</p>
+<p>   Mapped Statement也是mybatis一个底层封装对象，它包装了mybatis配置信息及sql映射信息等。mapper.xml文件中一个sql对应一个Mapped Statement对象，sql的id即是Mapped statement的id。</p>
+<ul>
+<li><p>输入映射</p>
+<p>Mapped Statement对sql执行输入参数进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql前将输入的java对象映射至sql中，输入参数映射就是jdbc编程中对preparedStatement设置参数</p>
+</li>
+<li><p>输出映射</p>
+<p>Mapped Statement对sql执行输出结果进行定义，包括HashMap、基本类型、pojo，Executor通过Mapped Statement在执行sql后将输出结果映射至java对象中，输出结果映射过程相当于jdbc编程中对结果的解析处理过程</p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="Mybatis入门程序"><a href="#Mybatis入门程序" class="headerlink" title="Mybatis入门程序"></a>Mybatis入门程序</h2><h3 id="MyBatis下载"><a href="#MyBatis下载" class="headerlink" title="MyBatis下载"></a>MyBatis下载</h3><p><a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="noopener">MyBatis下载地址</a></p>
+<p>点击上述链接进入页面后，再点击下图中的位置即可下载；下载完毕后压缩包中有MyBatis的依赖包（在lib目录下）。</p>
+<p><img src="https://user-gold-cdn.xitu.io/2020/2/28/1708993df0d82b96?w=173&amp;h=77&amp;f=png&amp;s=3411" alt="图2"></p>
+<h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><ol>
+<li>导入MyBatis依赖包以及数据库连接驱动</li>
+<li><p>编写SqlMapConfig.xml配置文件，配置文件的编写如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration PUBLIC</span><br><span class="line">   &quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span><br><span class="line">   &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">&lt;!--  与spring整合以后，environments配置将被废除  --&gt;</span><br><span class="line">&lt;environments default=&quot;development&quot;&gt;</span><br><span class="line">   &lt;environment id=&quot;development&quot;&gt;</span><br><span class="line">       &lt;!--事务管理，使用jdbc--&gt;</span><br><span class="line">       &lt;transactionManager type=&quot;jdbc&quot;&gt;&lt;/transactionManager&gt;</span><br><span class="line">       &lt;!--数据库连接池--&gt;</span><br><span class="line">       &lt;dataSource type=&quot;POOLED&quot;&gt;</span><br><span class="line">           &lt;!--配置数据库连接信息--&gt;</span><br><span class="line">           &lt;property name=&quot;driver&quot; value=&quot;com.mysql.jdbc.Driver&quot;&gt;&lt;/property&gt;</span><br><span class="line">           &lt;property name=&quot;url&quot; value=&quot;jdbc:mysql://localhost:3306/mybatistest?characterEncoding=UTF-8&quot;&gt;&lt;/property&gt;</span><br><span class="line">           &lt;property name=&quot;username&quot; value=&quot;数据库用户名&quot;&gt;&lt;/property&gt;</span><br><span class="line">           &lt;property name=&quot;password&quot; value=&quot;数据库密码&quot;&gt;&lt;/property&gt;</span><br><span class="line">       &lt;/dataSource&gt;</span><br><span class="line">   &lt;/environment&gt;</span><br><span class="line">&lt;/environments&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写日志输出文件log4j.properties，日志输出文件的编写如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># Global logging configuration</span><br><span class="line">log4j.rootLogger=DEBUG, stdout</span><br><span class="line"># Console output...</span><br><span class="line">log4j.appender.stdout=org.apache.log4j.ConsoleAppender</span><br><span class="line">log4j.appender.stdout.layout=org.apache.log4j.PatternLayout</span><br><span class="line">log4j.appender.stdout.layout.ConversionPattern=%5p [%t] - %m%n</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在数据库中创建表，我创建的是user表：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE `user` (</span><br><span class="line">`id` int(11) NOT NULL AUTO_INCREMENT,</span><br><span class="line">`username` varchar(32) NOT NULL COMMENT &apos;用户名称&apos;,</span><br><span class="line">`birthday` date DEFAULT NULL COMMENT &apos;生日&apos;,</span><br><span class="line">`sex` char(1) DEFAULT NULL COMMENT &apos;性别&apos;,</span><br><span class="line">`address` varchar(256) DEFAULT NULL COMMENT &apos;地址&apos;,</span><br><span class="line">PRIMARY KEY (`id`)</span><br><span class="line">) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写数据库中表的对应的pojo（Plain Ordinary Java Object，其实就是Java Bean）</p>
+</li>
+<li><p>编写UserMapper.xml，写法如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><br><span class="line">&lt;!DOCTYPE mapper PUBLIC</span><br><span class="line">   &quot;-//mybatis.org//DTD Mapper 3.0//EN&quot;</span><br><span class="line">   &quot;http://mybatis.org/dtd/mybatis-3-mapper.dtd&quot;&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">namespace:命名空间，用于隔离SQL</span><br><span class="line">-&gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">   id:sql的id</span><br><span class="line">   parameterType:输入参数的类型</span><br><span class="line">   resultType:输出结果的类型，应该填写对应POJO的全路径</span><br><span class="line">   #&#123;v&#125;:占位符，相当于jdbc中的?</span><br><span class="line">--&gt;</span><br><span class="line">&lt;select id=&quot;findUserById&quot; parameterType=&quot;Integer&quot;   resultType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   select * from user where id=#&#123;v&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在SqlMapperConfig.xml中配置UserMapper文件，写法如下：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--配置UserMapper.xml文件的位置--&gt;</span><br><span class="line">&lt;mappers&gt;</span><br><span class="line">   &lt;mapper resource=&quot;config/UserMapper.xml&quot;&gt;&lt;/mapper&gt;</span><br><span class="line">&lt;/mappers&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="案例"><a href="#案例" class="headerlink" title="案例"></a>案例</h3><h4 id="根据id查询单个用户"><a href="#根据id查询单个用户" class="headerlink" title="根据id查询单个用户"></a>根据id查询单个用户</h4><ol>
+<li><p>在UserMapper.xml中编写SQL语句：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--</span><br><span class="line">mapper:用于编写SQL语句，mapper元素中可以写多个SQL语句</span><br><span class="line">namespace:命名空间，用于隔离SQL</span><br><span class="line">--&gt;</span><br><span class="line">&lt;mapper namespace=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">   id:SQL语句的id</span><br><span class="line">   parameterType:输入参数的类型</span><br><span class="line">   resultType:输出结果的类型，应该填写对应POJO的全路径</span><br><span class="line">   &apos;#&#123;v&#125;&apos;:占位符，相当于jdbc中的?</span><br><span class="line">--&gt;</span><br><span class="line">&lt;!--</span><br><span class="line">   根据id查询单个用户</span><br><span class="line">--&gt;</span><br><span class="line">&lt;select id=&quot;findUserById&quot; parameterType=&quot;Integer&quot; resultType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   select * from user where id=$&#123;value&#125;</span><br><span class="line">&lt;/select&gt;</span><br><span class="line">&lt;/mapper&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>编写测试方法：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//根据id查找单个用户</span><br><span class="line">@Test</span><br><span class="line">public void findUserById() throws IOException &#123;</span><br><span class="line">   //加载SqlMapConfig.xml配置文件，把配置文件的路径作为参数传入</span><br><span class="line">   InputStream in =  Resources.getResourceAsStream(&quot;config/SqlMapConfig.xml&quot;);</span><br><span class="line">   //创建SqlSessionFactoryBuilder</span><br><span class="line">   SqlSessionFactoryBuilder sqlSessionFactoryBuilder = new SqlSessionFactoryBuilder();</span><br><span class="line">   //获取SqlSessionFactory（根据配置文件创建SqlSessionFactory）</span><br><span class="line">   SqlSessionFactory sqlSessionFactory = sqlSessionFactoryBuilder.build(in);</span><br><span class="line">   //获取SqlSession</span><br><span class="line">   SqlSession sqlSession = sqlSessionFactory.openSession();</span><br><span class="line">   //执行select操作，传入参数是SQL语句的id、SQL语句中的查找参数</span><br><span class="line">   User user = sqlSession.selectOne(&quot;findUserById&quot;, 1);</span><br><span class="line">   System.out.println(user);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p><strong><em>注意:</em></strong> 由于下面的例子中测试代码的前面部分与<code>根据id查询单个用户</code>中的测试代码是一样的，所以在下述的例子中，就只写SQL语句（写在<code>&lt;mapper&gt;&lt;/mapper&gt;</code>元素中）以及通过<code>sqlSession</code>进行操作数据库的语句（例如<code>根据id查询单个用户</code>测试代码中的<code>User user = sqlSession.selectOne(&quot;findUserById&quot;, 1);</code>这句），省略获取SqlSession对象的代码。</p>
+<h4 id="根据用户名模糊查询用户"><a href="#根据用户名模糊查询用户" class="headerlink" title="根据用户名模糊查询用户"></a>根据用户名模糊查询用户</h4><ul>
+<li><p>方式一</p>
+<ul>
+<li><p>SQL语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--模糊查询--&gt;</span><br><span class="line">&lt;select id=&quot;findUserListByLike&quot;</span><br><span class="line">       parameterType=&quot;String&quot;</span><br><span class="line">       resultType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   select * from user where username like #&#123;v&#125;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">List&lt;User&gt; userList = sqlSession.selectList(&quot;findUserListByLike&quot;, &quot;%张%&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>方式二</p>
+<ul>
+<li><p>SQL语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--模糊查询--&gt;</span><br><span class="line">&lt;select id=&quot;findUserListByLike&quot;</span><br><span class="line">       parameterType=&quot;String&quot;</span><br><span class="line">       resultType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   select * from user where username like &apos;%$&#123;value&#125;%&apos;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">List&lt;User&gt; userList = sqlSession.selectList(&quot;findUserListByLike&quot;, &quot;张&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>方式三</p>
+<ul>
+<li><p>SQL语句</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--模糊查询--&gt;</span><br><span class="line">&lt;select id=&quot;findUserListByLike&quot;</span><br><span class="line">       parameterType=&quot;String&quot;</span><br><span class="line">       resultType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   select * from user where username like &quot;%&quot;#&#123;v&#125;&quot;%&quot;</span><br><span class="line">&lt;/select&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">List&lt;User&gt; userList = sqlSession.selectList(&quot;findUserListByLike&quot;, &quot;张&quot;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><ul>
+<li><p>SQL语句</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--添加用户</span><br><span class="line">参数类型是User对象，所以在SQL语句中取参数值的时候，需要把User实体类里面的属性名写进去，而不能在&apos;#&#123;&#125;&apos;里面随便写几个字母</span><br><span class="line">--&gt;</span><br><span class="line">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   &lt;!--取参数的时候需要把User里面的属性写进&apos;#&#123;&#125;&apos;，而不能随便写--&gt;</span><br><span class="line">   insert into user values(#&#123;id&#125;,#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">User user = new User();</span><br><span class="line">user.setId(null);</span><br><span class="line">user.setUsername(&quot;用户名&quot;);</span><br><span class="line">user.setBirthday(new Date());</span><br><span class="line">user.setSex(&quot;男&quot;);</span><br><span class="line">user.setAddress(&quot;用户地址&quot;);</span><br><span class="line">// 需要&quot;改变&quot;数据库中数据的操作（例如：插入、删除、修改数据）都有一个int类型的返回值，该返回值表示对数据库中记录影响的行数</span><br><span class="line">int addUser = sqlSession.insert(&quot;addUser&quot;, user);</span><br><span class="line">sqlSession.commit();   //需要自己提交事务（在增删改查这四个操作中，除了查询操作，其余三个操作都需要提交事务）</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="添加用户返回ID"><a href="#添加用户返回ID" class="headerlink" title="添加用户返回ID"></a>添加用户返回ID</h4><ul>
+<li>需求：在使用MyBatis插入一个用户数据以后，获取该用户的id。</li>
+<li>select LAST_INSERT_ID();<ul>
+<li>这是MySQL中提供的查询最新添加数据的id，但是执行该条语句时，需要先执行一条插入语句才能返回id，否则就返回0。</li>
+</ul>
+</li>
+<li><p>SQL语句</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;insert id=&quot;addUser&quot; parameterType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   &lt;!--</span><br><span class="line">       标签实现主键返回</span><br><span class="line">       keyColumn：主键对应数据库表中的哪一列</span><br><span class="line">       keyProperty：主键对应pojo中的哪一个属性</span><br><span class="line">       order：设置在执行insert语句之前执行查询id的操作，还是在执行insert语句之后执行查询id的操作</span><br><span class="line">   --&gt;</span><br><span class="line">   </span><br><span class="line">   &lt;selectKey keyColumn=&quot;id&quot; keyProperty=&quot;id&quot; resultType=&quot;Integer&quot; order=&quot;AFTER&quot;&gt;</span><br><span class="line">       select LAST_INSERT_ID()</span><br><span class="line">   &lt;/selectKey&gt;</span><br><span class="line">   </span><br><span class="line">   &lt;!--取参数的时候需要把User里面的属性写进#&#123;&#125;，而不能随便写--&gt;</span><br><span class="line">   insert into user values(#&#123;id&#125;,#&#123;username&#125;,#&#123;birthday&#125;,#&#123;sex&#125;,#&#123;address&#125;)</span><br><span class="line">&lt;/insert&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">User user = new User();</span><br><span class="line">user.setId(null);</span><br><span class="line">user.setUsername(&quot;用户名&quot;);</span><br><span class="line">user.setBirthday(new Date());</span><br><span class="line">user.setSex(&quot;男&quot;);</span><br><span class="line">user.setAddress(&quot;用户地址&quot;);</span><br><span class="line">// 需要&quot;改变&quot;数据库中数据的操作（例如：插入、删除、修改数据）都有一个int类型的返回值，该返回值表示对数据库中记录影响的行数</span><br><span class="line">int addUser = sqlSession.insert(&quot;addUser&quot;, user);</span><br><span class="line">sqlSession.commit(); //需要自己提交事务（在增删改查这四个操作中，除了查询操作，其余三个操作都需要提交事务）</span><br><span class="line">System.out.println(user.getId()); //在提交事务之后获取id并打印</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="根据id修改用户数据"><a href="#根据id修改用户数据" class="headerlink" title="根据id修改用户数据"></a>根据id修改用户数据</h4><ul>
+<li><p>SQL语句</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--根据id修改用户数据--&gt;</span><br><span class="line">&lt;update id=&quot;updateUserById&quot; parameterType=&quot;com.xurenyi.pojo.User&quot;&gt;</span><br><span class="line">   update user set address=#&#123;address&#125;,birthday=#&#123;birthday&#125;  where id=#&#123;id&#125;</span><br><span class="line">&lt;/update&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">User user = new User();</span><br><span class="line">user.setId(28);</span><br><span class="line">user.setAddress(&quot;修改后的地址&quot;);</span><br><span class="line">user.setUsername(&quot;修改后的姓名&quot;);</span><br><span class="line">user.setSex(&quot;女&quot;);</span><br><span class="line">SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;yyyy-MM-dd hh:mm:ss&quot;);</span><br><span class="line">Date date = simpleDateFormat.parse(&quot;1994-01-01 17:06:00&quot;);</span><br><span class="line">user.setBirthday(date);</span><br><span class="line">sqlSession.update(&quot;updateUserById&quot;, user);</span><br><span class="line">//提交事务</span><br><span class="line">sqlSession.commit();</span><br><span class="line">//关闭sqlSession</span><br><span class="line">sqlSession.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="根据id删除用户"><a href="#根据id删除用户" class="headerlink" title="根据id删除用户"></a>根据id删除用户</h4><ul>
+<li><p>SQL语句</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--根据id删除用户数据--&gt;</span><br><span class="line">&lt;delete id=&quot;deleteUserById&quot; parameterType=&quot;Integer&quot;&gt;</span><br><span class="line">   delete from user where id=#&#123;id&#125;</span><br><span class="line">&lt;/delete&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>测试代码</p>
+   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">获取SqlSession对象的代码，略</span><br><span class="line">*/</span><br><span class="line">int count=sqlSession.delete(&quot;deleteUserById&quot;,28);</span><br><span class="line">//提交事务</span><br><span class="line">sqlSession.commit();</span><br><span class="line">System.out.println(count);</span><br><span class="line">//关闭sqlSession</span><br><span class="line">sqlSession.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>#{}和${}的区别<ul>
+<li>#{}<br>#{}表示一个占位符号，通过#{}可以实现preparedStatement向占位符中设置值，自动进行java类型和jdbc类型转换。#{}可以有效防止sql注入。 #{}可以接收简单类型值或pojo属性值。 如果parameterType传输单个简单类型值， #{}括号中可以是 value 或其它名称。</li>
+<li>${}<br>${}表示拼接 sql 串，通过${}可以将parameterType传入的内容拼接在sql中且不进行 jdbc类型转换,${}可以接收简单类型值或 pojo 属性值，如果 parameterType 传输单个简单类型值，${}括号中只能是 value。</li>
+</ul>
+</li>
+<li>parameterType和resultType<ul>
+<li>parameterType<br>指定输入参数类型，mybatis通过ognl从输入对象中获取参数值拼接在 sql 中。</li>
+<li>resultType<br>指定输出结果类型，mybatis 将 sql 查询结果的一行记录数据映射为resultType 指定类型的对象。如果有多条数据，则分别进行映射，并把对象放到容器 List 中。</li>
+</ul>
+</li>
+<li>selectOne和selectList<ul>
+<li>selectOne<br>selectOne用于查询一条记录，如果使用selectOne查询多条记录会报错。</li>
+<li>selectList<br>selectList用于查询一条或多条记录。</li>
+</ul>
+</li>
+<li><p>MyBatis解决JDBC编程的问题</p>
+<ul>
+<li>问题1<ul>
+<li>描述：数据库连接创建、释放频繁造成系统资源浪费从而影响系统性能，如果使用数据库连接池可解决此问题</li>
+<li>解决：在 SqlMapConfig.xml 中配置数据连接池，使用连接池管理数据库链接</li>
+</ul>
+</li>
+<li>问题2<ul>
+<li>描述：Sql 语句写在代码中造成代码不易维护，实际应用 sql 变化的可能较大，sql 变动需要改变 java代码</li>
+<li>解决：将 Sql 语句配置在 XXXXmapper.xml 文件中与 java 代码分离</li>
+</ul>
+</li>
+<li><p>问题3</p>
+<ul>
+<li>描述：向sql语句传参数麻烦，因为sql语句的where条件不一定，可能多也可能少，占位符需要和参数一一对应</li>
+<li>解决：Mybatis 自动将 java 对象映射至 sql 语句，通过 statement 中的 parameterType 定义输入参数的类型</li>
+</ul>
+</li>
+<li><p>问题4</p>
+<ul>
+<li>描述：对结果集解析麻烦，sql变化导致解析代码变化，且解析前需要遍历，如果 能将数据库记录封装成pojo对象解析比较方便</li>
+<li>解决：Mybatis自动将sql执行结果映射至java对象，通过statement中的 resultType定义输出结果的类型</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>MyBatis和Hibernate的异同<ul>
+<li>Mybatis和hibernate不同，它不完全是一个ORM框架，因为MyBatis需要程序员自己编写Sql语句。mybatis可以通过XML或注解方式灵活配置要运行的sql语句，并将java对象和sql语句映射生成最终执行的sql，最后将sql执行的结果再映射生成java对象。</li>
+<li>Mybatis学习门槛低，简单易学，程序员直接编写原生态sql，可严格控制sql执行性能，灵活度高，非常适合对关系数据模型要求不高的软件开发，例如：互联网软件、企业运营类软件等，因为这类软件需求变化频繁，一旦需求变化要求成果输出迅速。但是灵活的前提是 mybatis 无法做到数据库无关性，如果需要实现支持多种数据库的软件则需要自定义多套 sql 映射文件，工作量大。</li>
+<li>Hibernate 对象/关系映射能力强，数据库无关性好，对于关系模型要求高的软件（例如需求固定的定制化软件）如果用hibernate开发可以节省很多代码，提高效率。但是Hibernate的学习门槛高，要精通门槛更高，而且怎么设计O/R映射，在性能和对象模型之间如何权衡，以及怎样用好Hibernate需要具有很强的经验和能力才行。</li>
+<li>总之，按照用户的需求在有限的资源环境下只要能做出维护性、扩展性良好的软件架构都是好架构，所以框架只有适合才是最好。<h3 id="SqlMapConfig-xml配置文件详解"><a href="#SqlMapConfig-xml配置文件详解" class="headerlink" title="SqlMapConfig.xml配置文件详解"></a>SqlMapConfig.xml配置文件详解</h3><h4 id="SqlMapConfig-xml中配置的内容和顺序"><a href="#SqlMapConfig-xml中配置的内容和顺序" class="headerlink" title="SqlMapConfig.xml中配置的内容和顺序"></a>SqlMapConfig.xml中配置的内容和顺序</h4></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://user-gold-cdn.xitu.io/2020/2/28/17089db5bc51403e?w=431&amp;h=525&amp;f=png&amp;s=83612" alt="图3 SqlMapConfig.xml中配置的内容和顺序"><br>这里选讲几个元素。</p>
+<ul>
+<li><p>properties（属性）</p>
+<ul>
+<li><p>properties是用来加载外部配置文件的，其写法如下:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--使用resource加载外部配置文件--&gt;</span><br><span class="line">&lt;properties resource=&quot;外部配置文件的路径&quot;&gt;</span><br><span class="line">   &lt;!--如果外部配置文件中有该属性，那么内部定义的属性被外部属性覆盖--&gt;</span><br><span class="line">   &lt;property name=&quot;&quot; value=&quot;&quot;/&gt;</span><br><span class="line">&lt;/properties&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>MyBatis加载属性的顺序</p>
+<p>先读取properties元素体内自定义的属性，再读取properties中resource指定路径的外部配置文件中的属性，如果在外部配置文件中有同名属性，则后者会覆盖前者。</p>
+</li>
+<li><p>typeAliases（类型别名）</p>
+<p>有时候写实体类的全路径比较麻烦，所以可以取一个别名，这样可以在Mapper.xml中直接写别名调用。</p>
+</li>
+<li><p>定义单个别名</p>
+<p>定义单个别名的配置写法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;typeAliases&gt;</span><br><span class="line">   &lt;!--定义单个别名</span><br><span class="line">       type:需要被取别名的对象全路径</span><br><span class="line">       alias:对应的别名</span><br><span class="line">   --&gt;</span><br><span class="line">   &lt;typeAlias type=&quot;com.xurenyi.pojo.User&quot; alias=&quot;user&quot;&gt;&lt;/typeAlias&gt;</span><br><span class="line">&lt;/typeAliases&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>批量定义别名</p>
+<p>批量定义别名的配置写法如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">  &lt;typeAliases&gt;</span><br><span class="line">    &lt;!--批量定义别名</span><br><span class="line">        会扫描整个包下的类，别名是类名（大小写不敏感）</span><br><span class="line">    --&gt;</span><br><span class="line">    &lt;package name=&quot;com.xurenyi.pojo&quot;&gt;&lt;/package&gt;</span><br><span class="line">&lt;/typeAliases&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>mappers（映射器）</p>
+<ul>
+<li><p>用法1</p>
+<p><code>&lt;mapper resource=&quot;mapper.xml配置文件的全路径&quot;&gt;&lt;/mapper&gt;</code></p>
+</li>
+<li><p>用法2<br><code>&lt;mapper class=&quot;对应的mapper类的路径&quot;&gt;&lt;/mapper&gt;</code></p>
+<p>此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。</p>
+</li>
+<li><p>用法3<br><code>&lt;package name=&quot;包路径&quot;&gt;&lt;/mapper&gt;</code></p>
+<p>此种方法要求mapper接口名称和mapper映射文件名称相同，且放在同一个目录中。<br>实际项目开发中，会使用这种方法。</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/07/如何在IDEA中把一个类打包成Jar/" rel="next" title="如何在IDEA中把一个类打包成Jar">
+                <i class="fa fa-chevron-left"></i> 如何在IDEA中把一个类打包成Jar
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/touxiang.jpg" alt="QiShiYi">
+            
+              <p class="site-author-name" itemprop="name">QiShiYi</p>
+              <p class="site-description motion-element" itemprop="description">this is qishiyi's blog</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis概述"><span class="nav-number">1.</span> <span class="nav-text">MyBatis概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用JDBC存在的问题"><span class="nav-number">2.</span> <span class="nav-text">使用JDBC存在的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JDBC的编程步骤"><span class="nav-number">2.1.</span> <span class="nav-text">JDBC的编程步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存在的问题"><span class="nav-number">2.2.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MyBatis架构"><span class="nav-number">3.</span> <span class="nav-text">MyBatis架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MyBatis架构图"><span class="nav-number">3.1.</span> <span class="nav-text">MyBatis架构图</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#架构图解释"><span class="nav-number">3.2.</span> <span class="nav-text">架构图解释</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#MyBatis配置文件"><span class="nav-number">3.2.1.</span> <span class="nav-text">MyBatis配置文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mybatis入门程序"><span class="nav-number">4.</span> <span class="nav-text">Mybatis入门程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#MyBatis下载"><span class="nav-number">4.1.</span> <span class="nav-text">MyBatis下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境配置"><span class="nav-number">4.2.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例"><span class="nav-number">4.3.</span> <span class="nav-text">案例</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#根据id查询单个用户"><span class="nav-number">4.3.1.</span> <span class="nav-text">根据id查询单个用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据用户名模糊查询用户"><span class="nav-number">4.3.2.</span> <span class="nav-text">根据用户名模糊查询用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加用户"><span class="nav-number">4.3.3.</span> <span class="nav-text">添加用户</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加用户返回ID"><span class="nav-number">4.3.4.</span> <span class="nav-text">添加用户返回ID</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据id修改用户数据"><span class="nav-number">4.3.5.</span> <span class="nav-text">根据id修改用户数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#根据id删除用户"><span class="nav-number">4.3.6.</span> <span class="nav-text">根据id删除用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.4.</span> <span class="nav-text">小结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SqlMapConfig-xml配置文件详解"><span class="nav-number">4.5.</span> <span class="nav-text">SqlMapConfig.xml配置文件详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SqlMapConfig-xml中配置的内容和顺序"><span class="nav-number">4.5.1.</span> <span class="nav-text">SqlMapConfig.xml中配置的内容和顺序</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">QiShiYi</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
