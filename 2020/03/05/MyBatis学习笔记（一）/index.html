@@ -87,14 +87,14 @@
 <meta property="og:site_name" content="骑士逸">
 <meta property="og:description" content="学习MyBatis的笔记（一）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&h=543&f=png&s=35582">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/1708993df0d82b96?w=173&h=77&f=png&s=3411">
-<meta property="og:image" content="https://user-gold-cdn.xitu.io/2020/2/28/17089db5bc51403e?w=431&h=525&f=png&s=83612">
-<meta property="og:updated_time" content="2020-03-05T14:21:41.193Z">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/01.png">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/02.png">
+<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/03.png">
+<meta property="og:updated_time" content="2020-03-06T04:19:12.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MyBatis学习笔记（一）">
 <meta name="twitter:description" content="学习MyBatis的笔记（一）">
-<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&h=543&f=png&s=35582">
+<meta name="twitter:image" content="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/01.png">
 
 
 
@@ -345,7 +345,7 @@
 <li>使用preparedStatement向占位符传参数存在硬编码，因为sql语句的where条件不一定，可能多也可能少，修改sql还要修改代码，系统不易维护。</li>
 <li>对结果集解析存在硬编码（查询列名），sql变化导致解析代码变化，系统不易维护，如果能将数据库记录封装成pojo对象解析比较方便。</li>
 </ol>
-<h2 id="MyBatis架构"><a href="#MyBatis架构" class="headerlink" title="MyBatis架构"></a>MyBatis架构</h2><h3 id="MyBatis架构图"><a href="#MyBatis架构图" class="headerlink" title="MyBatis架构图"></a>MyBatis架构图</h3><p><img src="https://user-gold-cdn.xitu.io/2020/2/28/170898c5f7204086?w=623&amp;h=543&amp;f=png&amp;s=35582" alt="图1 MyBatis架构图"></p>
+<h2 id="MyBatis架构"><a href="#MyBatis架构" class="headerlink" title="MyBatis架构"></a>MyBatis架构</h2><h3 id="MyBatis架构图"><a href="#MyBatis架构图" class="headerlink" title="MyBatis架构图"></a>MyBatis架构图</h3><p><img src="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/01.png" alt="图1 MyBatis架构图"></p>
 <h3 id="架构图解释"><a href="#架构图解释" class="headerlink" title="架构图解释"></a>架构图解释</h3><h4 id="MyBatis配置文件"><a href="#MyBatis配置文件" class="headerlink" title="MyBatis配置文件"></a>MyBatis配置文件</h4><ul>
 <li><p>SqlMapConfig.xml</p>
 <p>   MyBatis的全局配置文件，配置了MyBatis的运行环境等信息</p>
@@ -373,7 +373,7 @@
 </ul>
 <h2 id="Mybatis入门程序"><a href="#Mybatis入门程序" class="headerlink" title="Mybatis入门程序"></a>Mybatis入门程序</h2><h3 id="MyBatis下载"><a href="#MyBatis下载" class="headerlink" title="MyBatis下载"></a>MyBatis下载</h3><p><a href="https://github.com/mybatis/mybatis-3/releases" target="_blank" rel="noopener">MyBatis下载地址</a></p>
 <p>点击上述链接进入页面后，再点击下图中的位置即可下载；下载完毕后压缩包中有MyBatis的依赖包（在lib目录下）。</p>
-<p><img src="https://user-gold-cdn.xitu.io/2020/2/28/1708993df0d82b96?w=173&amp;h=77&amp;f=png&amp;s=3411" alt="图2"></p>
+<p><img src="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/02.png" alt="图2"></p>
 <h3 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h3><ol>
 <li>导入MyBatis依赖包以及数据库连接驱动</li>
 <li><p>编写SqlMapConfig.xml配置文件，配置文件的编写如下：</p>
@@ -522,7 +522,7 @@
 </ul>
 </li>
 </ul>
-<p><img src="https://user-gold-cdn.xitu.io/2020/2/28/17089db5bc51403e?w=431&amp;h=525&amp;f=png&amp;s=83612" alt="图3 SqlMapConfig.xml中配置的内容和顺序"><br>这里选讲几个元素。</p>
+<p><img src="https://github.com/renyixu/BlogImages/raw/master/MyBatis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/03.png" alt="图3 SqlMapConfig.xml中配置的内容和顺序"><br>这里选讲几个元素。</p>
 <ul>
 <li><p>properties（属性）</p>
 <ul>
