@@ -79,23 +79,23 @@
 
 
 
-<meta name="description" content="一、流的分类按输入输出分类 输入流：将外设中的数据读取到内存中。 输出流：将内存中的数据写到外设中。按字节，字符分类 字节流：传输过程中，传输数据的最基本单位是字节的流。 字符流：传输过程中，传输数据的最基本单位是字符的流。二、字符流由来字节流读取字节数据后，先不操作数据，而是去查找指定的编码表，然后再对文字进行操作。简单来说，字符流=字节流+编码表。操作文本的字符流向文件中写数据FileWrit">
+<meta name="description" content="本文介绍Java输入/输出流基础知识。">
 <meta name="keywords" content="java mysql web">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java输入输出流基础（IO）">
 <meta property="og:url" content="http://yoursite.com/2020/05/18/Java输入输出流基础（IO）/index.html">
 <meta property="og:site_name" content="骑士逸">
-<meta property="og:description" content="一、流的分类按输入输出分类 输入流：将外设中的数据读取到内存中。 输出流：将内存中的数据写到外设中。按字节，字符分类 字节流：传输过程中，传输数据的最基本单位是字节的流。 字符流：传输过程中，传输数据的最基本单位是字符的流。二、字符流由来字节流读取字节数据后，先不操作数据，而是去查找指定的编码表，然后再对文字进行操作。简单来说，字符流=字节流+编码表。操作文本的字符流向文件中写数据FileWrit">
+<meta property="og:description" content="本文介绍Java输入/输出流基础知识。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/01.png">
 <meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/02.png">
 <meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/03.png">
 <meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/04.png">
 <meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/05.png">
-<meta property="og:updated_time" content="2020-05-18T03:06:08.690Z">
+<meta property="og:updated_time" content="2020-05-18T03:40:20.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java输入输出流基础（IO）">
-<meta name="twitter:description" content="一、流的分类按输入输出分类 输入流：将外设中的数据读取到内存中。 输出流：将内存中的数据写到外设中。按字节，字符分类 字节流：传输过程中，传输数据的最基本单位是字节的流。 字符流：传输过程中，传输数据的最基本单位是字符的流。二、字符流由来字节流读取字节数据后，先不操作数据，而是去查找指定的编码表，然后再对文字进行操作。简单来说，字符流=字节流+编码表。操作文本的字符流向文件中写数据FileWrit">
+<meta name="twitter:description" content="本文介绍Java输入/输出流基础知识。">
 <meta name="twitter:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/01.png">
 
 
@@ -311,6 +311,10 @@
 
           
 
+          
+              <div class="post-description">
+                  本文介绍Java输入/输出流基础知识。
+              </div>
           
 
         </div>
