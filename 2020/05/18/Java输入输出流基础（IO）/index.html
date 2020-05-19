@@ -87,16 +87,16 @@
 <meta property="og:site_name" content="骑士逸">
 <meta property="og:description" content="本文介绍Java输入/输出流基础知识。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/images/01.png">
-<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/02.png">
-<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/03.png">
-<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/04.png">
-<meta property="og:image" content="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/05.png">
-<meta property="og:updated_time" content="2020-05-19T01:59:58.189Z">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/01.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/02.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/03.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/04.png">
+<meta property="og:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/05.png">
+<meta property="og:updated_time" content="2020-05-19T02:23:31.544Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java输入输出流基础（IO）">
 <meta name="twitter:description" content="本文介绍Java输入/输出流基础知识。">
-<meta name="twitter:image" content="http://yoursite.com/images/01.png">
+<meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/01.png">
 
 
 
@@ -370,7 +370,7 @@
 <li>int read(char ch[])：每次返回读取到的字符数，即读到了几个字符</li>
 </ul>
 <p>该方法原理图：</p>
-<p><img src="/images/01.png" alt="图1"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/01.png" alt="图1"></p>
 <ul>
 <li>int read(char ch[],int start,int len)</li>
 <li>close()：关闭资源。<h3 id="小练习（复制并粘贴一个文本文件）"><a href="#小练习（复制并粘贴一个文本文件）" class="headerlink" title="小练习（复制并粘贴一个文本文件）"></a>小练习（复制并粘贴一个文本文件）</h3></li>
@@ -378,7 +378,7 @@
 <li>注意点：复制的过程中可能会产生中文乱码，这是因为编码方式不一致导致的：FileReader读取字符以及FileWriter写字符时的编码方式是根据操作系统的编码方式来的，而txt文本的编码方式可能会与上述编码方式不一致，所以会产生乱码。</li>
 <li>文本文件复制原理图：</li>
 </ul>
-<p><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/02.png" alt="图2"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/02.png" alt="图2"></p>
 <ul>
 <li>实现代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public void test01() &#123;</span><br><span class="line">        FileReader fr = null;</span><br><span class="line">        FileWriter fw = null;</span><br><span class="line">        try &#123;</span><br><span class="line">            fr = new FileReader(&quot;G:\\系统属性.txt&quot;);</span><br><span class="line">            fw = new FileWriter(&quot;F:\\系统属性.txt&quot;, true);</span><br><span class="line">            char ch[] = new char[1024];</span><br><span class="line">            int len = -1;</span><br><span class="line">            while ((len = fr.read(ch)) != -1) &#123;</span><br><span class="line">                fw.write(ch, 0, len);</span><br><span class="line">                fw.flush();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125; finally &#123;</span><br><span class="line">            if (fr != null) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    fr.close();</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    throw new RuntimeException(&quot;异常......&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            if (fw != null) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    fw.close();</span><br><span class="line">                &#125; catch (IOException e) &#123;</span><br><span class="line">                    throw new RuntimeException(&quot;异常......&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
 </li>
@@ -408,7 +408,7 @@
 <li>String readlLine()：读取一行文本，返回读取到的字符串，如果读取到流的末尾，则返回空。</li>
 </ul>
 <p>read()以及readLine()方法原理图：</p>
-<p><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/03.png" alt="图3"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/03.png" alt="图3"></p>
 <h3 id="LineNumberReader"><a href="#LineNumberReader" class="headerlink" title="LineNumberReader"></a>LineNumberReader</h3><p>介绍：LineNumberReader是BufferedReader的子类，LineNumberReader记录了当前行号，也可以获取/设置行号。</p>
 <p>构造方法：</p>
 <ul>
@@ -482,7 +482,7 @@
 <li>new OutputStreamWriter(OutputStream out)：需要传入一个OutputStream对象，使用当前平台（操作系统）的编码方式来编码。</li>
 <li>new OutputStreamWriter(OutputStream out,String charsetName)：使用指定的编码方式来编码。<h2 id="转换流原理图"><a href="#转换流原理图" class="headerlink" title="转换流原理图"></a>转换流原理图</h2></li>
 </ul>
-<p><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/04.png" alt="图4"></p>
+<p><img src="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/04.png" alt="图4"></p>
 <h2 id="以指定编码方式来读取某文本"><a href="#以指定编码方式来读取某文本" class="headerlink" title="以指定编码方式来读取某文本"></a>以指定编码方式来读取某文本</h2><p>遇到这种需求时，就需要用到转换流，因为只有转换流才能指定编解码格式。GBK把一个汉字解析成两个字节，UTF-8把一个汉字解析成三个字节。所以，如果写入文本用的编码格式与读取文本用的解码格式不一样的话，就会读取到乱码（也可能是问号？）。<br>代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">    //使用指定编码方式写入一个字符串到文本文件中</span><br><span class="line">    public void test03() throws IOException &#123;</span><br><span class="line">        OutputStreamWriter outputStreamWriter =</span><br><span class="line">                new OutputStreamWriter(new FileOutputStream(&quot;G:\\转换流.txt&quot;), &quot;GBK&quot;);</span><br><span class="line">        outputStreamWriter.write(&quot;你好，大兄弟！！&quot;);</span><br><span class="line">        outputStreamWriter.flush();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Test</span><br><span class="line">    //使用指定的解码格式读取文本文件中的字符串</span><br><span class="line">    public void test04() throws IOException &#123;</span><br><span class="line">        InputStreamReader inputStreamReader =</span><br><span class="line">                new InputStreamReader(new FileInputStream(&quot;G:\\转换流.txt&quot;), &quot;UTF-8&quot;);</span><br><span class="line">        char[] ch = new char[10];</span><br><span class="line">        int len = -1;</span><br><span class="line">        while ((len = inputStreamReader.read(ch)) != -1) &#123;</span><br><span class="line">            System.out.println(new String(ch, 0, len));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="五、File"><a href="#五、File" class="headerlink" title="五、File"></a>五、File</h1><p>构造方法：</p>
 <ul>
@@ -529,7 +529,7 @@
 <li>过滤器分为两种，一种是FilenameFilter（通过文件名字来过滤，比如可以过滤掉非.txt后缀的文件），另一种是FileFilter（通过文件来过滤，比如可以过滤掉隐藏文件）。</li>
 <li>FilenameFilter：FilenameFilter是一个接口，它里面有一个抽象方法boolean accept(File f,String name)，文件的过滤就是通过该方法来过滤的。自定义过滤器实现该接口后，实现accept()方法，如果该方法返回true，那么就留下当前遍历到的文件，否则就不留下。</li>
 <li>FileFilter：FileFilter过滤器的原理与FilenameFilter的原理是一样的，只不过该接口里面的抽象方法是boolean accept(File f)，方法参数里面只有一个File对象，并没有文件名。因为该过滤器是通过File来过滤的，与文件名无关。</li>
-<li>过滤器原理图<br><img src="https://github.com/renyixu/BlogImages/raw/master/Java%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E5%9F%BA%E7%A1%80%EF%BC%88IO%E6%B5%81%EF%BC%89/05.png" alt="图5"></li>
+<li>过滤器原理图<br><img src="https://cdn.jsdelivr.net/gh/renyixu/BlogImages/images/05.png" alt="图5"></li>
 </ul>
 </li>
 </ul>
